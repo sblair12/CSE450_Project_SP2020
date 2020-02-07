@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Transform aimPivot;
     public GameObject projectilePrefab;
     public float speed;
+    public int health;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +61,14 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<EnemyController>())
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (health > 1)
+            {
+                health--;
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 }

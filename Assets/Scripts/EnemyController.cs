@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Projectile>())
+        if (collision.gameObject.GetComponent<Projectile>() || collision.gameObject.GetComponent<PlayerController>())
         {
             Destroy(gameObject);
         }
