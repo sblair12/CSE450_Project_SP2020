@@ -5,12 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController instance;
+
     // Outlets
     Rigidbody2D _rb;
     public Transform aimPivot;
     public GameObject projectilePrefab;
     public float speed;
     public int health;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
