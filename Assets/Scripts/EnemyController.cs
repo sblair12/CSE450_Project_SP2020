@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     Rigidbody2D _rb;
 
     public float speed;
+    public int enemyHealth;
     public Transform playerTransform;
 
     // Start is called before the first frame update
@@ -25,7 +26,18 @@ public class EnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<Projectile>() || collision.gameObject.GetComponent<PlayerController>())
+        if (collision.gameObject.GetComponent<Projectile>())
+        {
+            if(enemyHealth>1)
+            {
+                enemyHealth--;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        if (collision.gameObject.GetComponent<PlayerController>())
         {
             Destroy(gameObject);
         }
