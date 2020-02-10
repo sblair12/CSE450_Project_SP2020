@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : EntityController
 {
     // Outlets
-    Rigidbody2D _rb;
-
-    public float speed;
-    public int enemyHealth;
     public Transform playerTransform;
 
     // Start is called before the first frame update
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.Find("Player").transform;
     }
 
@@ -28,9 +23,10 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Projectile>())
         {
-            if(enemyHealth>1)
+            if(health > 1)
             {
-                enemyHealth--;
+                health--;
+                DisplayDamage();
             }
             else
             {

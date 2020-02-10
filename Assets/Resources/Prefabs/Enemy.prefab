@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  enemyHealth: 1
+  health: 1
   playerTransform: {fileID: 0}

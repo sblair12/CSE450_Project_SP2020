@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : EntityController
 {
     private static PlayerController instance;
 
@@ -11,8 +11,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D _rb;
     public Transform aimPivot;
     public GameObject projectilePrefab;
-    public float speed;
-    public int health;
 
     private void Awake()
     {
@@ -79,6 +77,7 @@ public class PlayerController : MonoBehaviour
             if (health > 1)
             {
                 health--;
+                DisplayDamage();
             }
             else
             {
