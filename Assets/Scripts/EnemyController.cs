@@ -16,7 +16,10 @@ public class EnemyController : EntityController
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+        if (transform != null && playerTransform != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

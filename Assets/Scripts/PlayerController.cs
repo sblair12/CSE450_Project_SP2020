@@ -81,7 +81,12 @@ public class PlayerController : EntityController
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                // Destroy HealthStatus and Player
+                Destroy(GameObject.Find("HealthStatus"));
+                Destroy(this.gameObject);
+
+                // Load the initial scene on death for now
+                SceneManager.LoadScene(0);
             }
         }
     }
