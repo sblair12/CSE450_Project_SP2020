@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 public class PlayerController : EntityController
 {
     private static PlayerController instance;
+    private static float timeOfCollision;
 
     // Outlets
     Rigidbody2D _rb;
     public Transform aimPivot;
     public GameObject projectilePrefab;
+    public float damageRecoveryTime;
 
     private void Awake()
     {
@@ -70,14 +72,15 @@ public class PlayerController : EntityController
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<EnemyController>())
+        if (collision.gameObject.GetComponent<EnemyController>() && Time.time - timeOfCollision > damageRecoveryTime)
         {
+            timeOfCollision = Time.time;
             if (health > 1)
             {
                 health--;
-                DisplayDamage();
+                DisplayDamage(damageRecoveryTime);
             }
             else
             {
@@ -90,4 +93,25 @@ public class PlayerController : EntityController
             }
         }
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.GetComponent<EnemyController>())
+    //    {
+    //        if (health > 1)
+    //        {
+    //            health--;
+    //            DisplayDamage(0.25f);
+    //        }
+    //        else
+    //        {
+    //            // Destroy HealthStatus and Player
+    //            Destroy(GameObject.Find("HealthStatus"));
+    //            Destroy(this.gameObject);
+
+    //            // Load the initial scene on death for now
+    //            SceneManager.LoadScene(0);
+    //        }
+    //    }
+    //}
 }

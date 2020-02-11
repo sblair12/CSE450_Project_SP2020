@@ -5,11 +5,15 @@ using UnityEngine;
 public class EnemyController : EntityController
 {
     // Outlets
-    public Transform playerTransform;
+    public float stoppingSpeedMultiplier;
+
+    Rigidbody2D _rb;
+    Transform playerTransform;
 
     // Start is called before the first frame update
     void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.Find("Player").transform;
     }
 
@@ -18,7 +22,20 @@ public class EnemyController : EntityController
     {
         if (transform != null && playerTransform != null)
         {
-            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+            Vector2 vectorTowardsPlayer = playerTransform.position - transform.position;
+
+            if (Vector2.Distance(playerTransform.position, transform.position) > 0.2)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+            }
+            //if (Vector2.Angle(_rb.velocity, vectorTowardsPlayer) > 90)
+            //{
+            //    _rb.AddForce((vectorTowardsPlayer) * stoppingSpeedMultiplier * speed * Time.deltaTime);
+            //}
+            //else
+            //{
+            //    _rb.AddForce((vectorTowardsPlayer) * speed * Time.deltaTime);
+            //}
         }
     }
 
@@ -26,19 +43,15 @@ public class EnemyController : EntityController
     {
         if (collision.gameObject.GetComponent<Projectile>())
         {
-            if(health > 1)
+            if (health > 1)
             {
                 health--;
-                DisplayDamage();
+                DisplayDamage(0.25f);
             }
             else
             {
                 Destroy(gameObject);
             }
-        }
-        if (collision.gameObject.GetComponent<PlayerController>())
-        {
-            Destroy(gameObject);
         }
     }
 }

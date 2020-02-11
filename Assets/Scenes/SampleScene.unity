@@ -152,7 +152,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2597359243598379128, guid: fff85c2f6940123459d928b2b1f0b810,
     type: 3}
   timeOffset: 4
-  frequency: 3
+  frequency: 1
 --- !u!4 &169207833
 Transform:
   m_ObjectHideFlags: 0
@@ -594,11 +594,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4254ac9604f354d49a0821b42b602ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  health: 3
   aimPivot: {fileID: 989450643}
   projectilePrefab: {fileID: 7246824363234414341, guid: f09382dc70de8d34dacb67162cd324ce,
     type: 3}
-  speed: 10
-  health: 3
+  damageRecoveryTime: 1
 --- !u!50 &970178273
 Rigidbody2D:
   serializedVersion: 4
@@ -619,7 +620,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &970178274
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -996,7 +997,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 2597359243598379128, guid: fff85c2f6940123459d928b2b1f0b810,
     type: 3}
   timeOffset: 3
-  frequency: 3
+  frequency: 2
 --- !u!4 &2072304313
 Transform:
   m_ObjectHideFlags: 0

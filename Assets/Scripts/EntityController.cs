@@ -8,10 +8,10 @@ public class EntityController : MonoBehaviour
     public float speed;
     public int health;
 
-    protected void DisplayDamage()
+    protected void DisplayDamage(float length)
     {
         StartCoroutine(ShadeSprite(128f / 255f, 0));
-        StartCoroutine(ShadeSprite(1, 0.25f));
+        StartCoroutine(ShadeSprite(1, length));
     }
 
     protected IEnumerator ShadeSprite(float value, float delay)
