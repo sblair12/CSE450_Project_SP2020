@@ -10,6 +10,8 @@ public class PlayerController : EntityController
 
     // Outlets
     Rigidbody2D _rb;
+    SpriteRenderer _sr;
+
     public Transform aimPivot;
     public GameObject projectilePrefab;
     public float damageRecoveryTime;
@@ -31,6 +33,7 @@ public class PlayerController : EntityController
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -62,6 +65,16 @@ public class PlayerController : EntityController
         float angleToMouse = radiansToMouse * 180f / Mathf.PI;
 
         aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
+
+        // Orient character based on mouse angle
+        if (angleToMouse > -90 && angleToMouse <= 90)
+        {
+            _sr.flipX = true;
+        }
+        else
+        {
+            _sr.flipX = false;
+        }
 
         // Shoot with left mouse
         if (Input.GetMouseButtonDown(0))
