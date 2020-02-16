@@ -7,8 +7,8 @@ public class EnemyController : EntityController
     // Outlets
     public float stoppingSpeedMultiplier;
 
-    Rigidbody2D _rb;
-    Transform playerTransform;
+    protected Rigidbody2D _rb;
+    protected Transform playerTransform;
 
     // Start is called before the first frame update
     void Start()
