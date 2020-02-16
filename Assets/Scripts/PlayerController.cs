@@ -12,6 +12,9 @@ public class PlayerController : EntityController
     Rigidbody2D _rb;
     SpriteRenderer _sr;
 
+    // Texture outlets for perspective based on Player orientation
+    public Sprite horizontalPerspective, upPerspective, downPerspective;
+
     public Transform aimPivot;
     public GameObject projectilePrefab;
     public float damageRecoveryTime;
@@ -67,13 +70,37 @@ public class PlayerController : EntityController
         aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
 
         // Orient character based on mouse angle
-        if (angleToMouse > -90 && angleToMouse <= 90)
+        float absAngle = Mathf.Abs(angleToMouse);
+
+        // Horizontal aim
+        if (absAngle > 135 || absAngle < 35)
         {
-            _sr.flipX = true;
+            _sr.sprite = horizontalPerspective;
+
+            // Facing to the right
+            if (absAngle < 45)
+            {
+                _sr.flipX = false;
+            }
+            // Facing to the left
+            else
+            {
+                _sr.flipX = true;
+            }
         }
+        // Vertical aim
         else
         {
             _sr.flipX = false;
+            // Facing up
+            if (angleToMouse > 0)
+            {
+                _sr.sprite = upPerspective;
+            }
+            else
+            {
+                _sr.sprite = downPerspective;
+            }
         }
 
         // Shoot with left mouse
