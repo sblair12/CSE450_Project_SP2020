@@ -433,4 +433,8 @@ MonoBehaviour:
   speed: 0
   health: 2
   stoppingSpeedMultiplier: 0
+  projectilePrefab: {fileID: 0}
   sightDistance: 200
+  playerLayer: 0
+  boundaryLayer: 0
+  shootDelay: 0

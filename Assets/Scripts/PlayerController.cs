@@ -107,14 +107,15 @@ public class PlayerController : EntityController
         if (Input.GetMouseButtonDown(0))
         {
             GameObject newProjectile = Instantiate(projectilePrefab);
+            newProjectile.layer = LayerMask.NameToLayer("PlayerProjectile");
             newProjectile.transform.position = transform.position;
             newProjectile.transform.rotation = aimPivot.rotation;
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void handleCollision(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<EnemyController>() && Time.time - timeOfCollision > damageRecoveryTime)
+        if ((collision.gameObject.GetComponent<EnemyController>() || collision.gameObject.GetComponent<Projectile>()) && Time.time - timeOfCollision > damageRecoveryTime)
         {
             timeOfCollision = Time.time;
             if (health > 1)
@@ -132,6 +133,16 @@ public class PlayerController : EntityController
                 SceneManager.LoadScene(0);
             }
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        handleCollision(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        handleCollision(collision);
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
