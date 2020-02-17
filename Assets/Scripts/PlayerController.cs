@@ -138,10 +138,14 @@ public class PlayerController : EntityController
         }
         else if (collision.gameObject.GetComponent<ItemController>())
         {
+            // Item Types here!
             switch (collision.gameObject.GetComponent<ItemController>().type)
             {
                 case "fire":
                     maxShots++;
+                    break;
+                case "heart":
+                    health++;
                     break;
             }
         }
