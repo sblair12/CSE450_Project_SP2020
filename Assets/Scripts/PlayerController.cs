@@ -19,6 +19,8 @@ public class PlayerController : EntityController
     public GameObject projectilePrefab;
     public float damageRecoveryTime;
 
+    public int maxShots;
+
     private void Awake()
     {
         if (instance == null)
@@ -104,7 +106,8 @@ public class PlayerController : EntityController
         }
 
         // Shoot with left mouse
-        if (Input.GetMouseButtonDown(0))
+        Projectile[] projectilesLoaded = GameObject.FindObjectsOfType<Projectile>();
+        if (Input.GetMouseButtonDown(0) && projectilesLoaded.Length < maxShots)
         {
             GameObject newProjectile = Instantiate(projectilePrefab);
             newProjectile.layer = LayerMask.NameToLayer("PlayerProjectile");
@@ -131,6 +134,15 @@ public class PlayerController : EntityController
 
                 // Load the initial scene on death for now
                 SceneManager.LoadScene(0);
+            }
+        }
+        else if (collision.gameObject.GetComponent<ItemController>())
+        {
+            switch (collision.gameObject.GetComponent<ItemController>().type)
+            {
+                case "fire":
+                    maxShots++;
+                    break;
             }
         }
     }
