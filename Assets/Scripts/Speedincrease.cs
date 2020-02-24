@@ -11,7 +11,7 @@ public class Speedincrease : MonoBehaviour
         if (collision.gameObject.GetComponent<PlayerController>())
         {
             Destroy(gameObject);
-            PlayerController.speed = Speedincrease * 2;
+            //PlayerController.speed = speed * 2;
         }
     }
 }
