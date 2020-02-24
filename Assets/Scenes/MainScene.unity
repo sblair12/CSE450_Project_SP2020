@@ -247,7 +247,7 @@ PrefabInstance:
     - target: {fileID: 8478563081585077549, guid: 23e000a8e92a3d14bb5bc2dda7f5e5b5,
         type: 3}
       propertyPath: sceneToSwitchTo
-      value: MazeScene
+      value: LearningScene
       objectReference: {fileID: 0}
     - target: {fileID: 8478563081585077549, guid: 23e000a8e92a3d14bb5bc2dda7f5e5b5,
         type: 3}
@@ -332,6 +332,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boundary (Bottom)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478563081585077549, guid: 23e000a8e92a3d14bb5bc2dda7f5e5b5,
+        type: 3}
+      propertyPath: horizontalSceneShift
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478563081585077549, guid: 23e000a8e92a3d14bb5bc2dda7f5e5b5,
+        type: 3}
+      propertyPath: sceneToSwitchTo
+      value: MazeScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23e000a8e92a3d14bb5bc2dda7f5e5b5, type: 3}
