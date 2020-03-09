@@ -20,23 +20,27 @@ public class EnemyController : EntityController
     // Update is called once per frame
     void Update()
     {
-        if (transform != null && playerTransform != null)
+        if (Vector2.Distance(playerTransform.position, transform.position) < 7)
         {
-            Vector2 vectorTowardsPlayer = playerTransform.position - transform.position;
-
-            if (Vector2.Distance(playerTransform.position, transform.position) > 0.2)
+            if (transform != null && playerTransform != null)
             {
-                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+                Vector2 vectorTowardsPlayer = playerTransform.position - transform.position;
+
+                if (Vector2.Distance(playerTransform.position, transform.position) > 0.2)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed * Time.deltaTime);
+                }
+                //if (Vector2.Angle(_rb.velocity, vectorTowardsPlayer) > 90)
+                //{
+                //    _rb.AddForce((vectorTowardsPlayer) * stoppingSpeedMultiplier * speed * Time.deltaTime);
+                //}
+                //else
+                //{
+                //    _rb.AddForce((vectorTowardsPlayer) * speed * Time.deltaTime);
+                //}
             }
-            //if (Vector2.Angle(_rb.velocity, vectorTowardsPlayer) > 90)
-            //{
-            //    _rb.AddForce((vectorTowardsPlayer) * stoppingSpeedMultiplier * speed * Time.deltaTime);
-            //}
-            //else
-            //{
-            //    _rb.AddForce((vectorTowardsPlayer) * speed * Time.deltaTime);
-            //}
         }
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
