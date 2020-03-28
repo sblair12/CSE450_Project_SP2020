@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -106,11 +107,13 @@ public class PlayerController : EntityController
         }
 
         // Shoot with left mouse
-        Projectile[] projectilesLoaded = GameObject.FindObjectsOfType<Projectile>();
-        if (Input.GetMouseButtonDown(0) && projectilesLoaded.Length < maxShots)
+        Projectile[] playerProjectilesLoaded = GameObject.FindObjectsOfType<Projectile>();
+        playerProjectilesLoaded = Array.FindAll(playerProjectilesLoaded, p => p.isPlayerProjectile);
+        if (Input.GetMouseButtonDown(0) && playerProjectilesLoaded.Length < maxShots)
         {
             GameObject newProjectile = Instantiate(projectilePrefab);
             newProjectile.layer = LayerMask.NameToLayer("PlayerProjectile");
+            newProjectile.GetComponent<Projectile>().isPlayerProjectile = true;
             newProjectile.transform.position = transform.position;
             newProjectile.transform.rotation = aimPivot.rotation;
         }
