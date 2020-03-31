@@ -136,7 +136,7 @@ public class PlayerController : EntityController
                 Destroy(this.gameObject);
 
                 // Load the initial scene on death for now
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene("MainMenuScene");
             }
         }
         else if (collision.gameObject.GetComponent<ItemController>())
