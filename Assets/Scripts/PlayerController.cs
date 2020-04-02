@@ -42,26 +42,29 @@ public class PlayerController : EntityController
         _sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            _rb.AddForce(Vector2.left * speed);
+            _rb.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _rb.AddForce(Vector2.right * speed);
+            _rb.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
         }
         if (Input.GetKey(KeyCode.W))
         {
-            _rb.AddForce(Vector2.up * speed);
+            _rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            _rb.AddForce(Vector2.down * speed);
+            _rb.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
         }
+    }
 
+    // Update is called once per frame
+    void Update()
+    {
         // Aim reticle with mouse
         Vector3 mousePosition = Input.mousePosition;
         Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
