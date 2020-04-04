@@ -21,15 +21,17 @@ public class Boundary : MonoBehaviour
             {
                 if (oldX > 0)
                 {
-                    oldX -= 0.1f;
+                    oldX -= 0.2f;
                 }
                 else
                 {
-                    oldX += 0.1f;
+                    oldX += 0.2f;
                 }
 
                 collision.gameObject.transform.position = new Vector3(-oldX, oldY);
             }
+
+
             //else
             //{
             //    if (oldPosition.y > 0)
@@ -44,5 +46,10 @@ public class Boundary : MonoBehaviour
             //    collision.gameObject.transform.position = new Vector3(oldPosition.x, -oldPosition.y);
             //}
         }
+    }
+
+    private void AutoSave()
+    {
+
     }
 }
