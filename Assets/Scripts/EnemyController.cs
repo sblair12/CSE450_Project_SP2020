@@ -20,7 +20,7 @@ public class EnemyController : EntityController
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(playerTransform.position, transform.position) < 13)
+        if (playerTransform != null && Vector2.Distance(playerTransform.position, transform.position) < 13)
         {
             if (transform != null && playerTransform != null)
             {

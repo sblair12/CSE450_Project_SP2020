@@ -163,7 +163,10 @@ public class PlayerController : EntityController
                     maxShots++;
                     break;
                 case "heart":
-                    health++;
+                    if (health < 3)
+                    {
+                        health++;
+                    }
                     break;
             }
         }
