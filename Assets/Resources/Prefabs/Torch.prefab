@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8716113610723135761}
   - component: {fileID: 8716113610723135766}
   - component: {fileID: 8716113610723135762}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0791c3fc7497f1c4da1f71bece8b2ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  openingTorch: 0
 --- !u!70 &8716113610723135766
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
