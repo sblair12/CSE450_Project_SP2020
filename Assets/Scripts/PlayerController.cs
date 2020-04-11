@@ -6,9 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : EntityController
 {
+    public static String PLAYER_PROJECTILE = "PlayerProjectile";
+
     public static PlayerController instance;
     private static bool isPaused = false;
     private static float timeOfCollision;
+
+    public int requiredTorches;
+    public int torchesLit = 0;
 
     // Outlets
     Rigidbody2D _rb;
@@ -118,7 +123,7 @@ public class PlayerController : EntityController
             if (Input.GetMouseButtonDown(0) && playerProjectilesLoaded.Length < maxShots)
             {
                 GameObject newProjectile = Instantiate(projectilePrefab);
-                newProjectile.layer = LayerMask.NameToLayer("PlayerProjectile");
+                newProjectile.layer = LayerMask.NameToLayer(PLAYER_PROJECTILE);
                 newProjectile.GetComponent<Projectile>().isPlayerProjectile = true;
                 newProjectile.transform.position = transform.position;
                 newProjectile.transform.rotation = aimPivot.rotation;

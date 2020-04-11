@@ -433,8 +433,9 @@ MonoBehaviour:
   speed: 0
   health: 2
   stoppingSpeedMultiplier: 0
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 7246824363234414341, guid: f09382dc70de8d34dacb67162cd324ce,
+    type: 3}
   sightDistance: 200
-  playerLayer: 0
-  boundaryLayer: 0
-  shootDelay: 0
+  playerLayer: 9
+  boundaryLayer: 10
+  shootDelay: 2
