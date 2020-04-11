@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +13,14 @@ public class TorchController : MonoBehaviour
         { "Scene11", false },
         { "Scene12", false }
     };
+
+    public static void ResetTorches()
+    {
+        foreach(string key in mapTorches.Keys.ToList())
+        {
+            mapTorches[key] = false;
+        }
+    }
 
     private Animator animator;
     private bool lit = false;
