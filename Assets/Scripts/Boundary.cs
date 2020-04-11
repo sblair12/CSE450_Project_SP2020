@@ -7,10 +7,16 @@ public class Boundary : MonoBehaviour
 {
     public string sceneToSwitchTo;
     public bool horizontalSceneShift;
+    public bool isEnabled;
+
+    public void ToggleEnabled()
+    {
+        isEnabled = !isEnabled;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() && !string.IsNullOrEmpty(sceneToSwitchTo))
+        if (isEnabled && collision.gameObject.GetComponent<PlayerController>() && !string.IsNullOrEmpty(sceneToSwitchTo))
         {
             SceneManager.LoadScene(sceneToSwitchTo);
 

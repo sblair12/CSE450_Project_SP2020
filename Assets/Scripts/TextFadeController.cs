@@ -10,6 +10,7 @@ public class TextFadeController : MonoBehaviour
 
     public GameObject tutorialText;
     public GameObject objectiveText;
+    public GameObject[] boundaries;
     public float showDuration;
     public float textPauseDuration;
 
@@ -34,9 +35,20 @@ public class TextFadeController : MonoBehaviour
 
     private IEnumerator StartTextCoroutines()
     {
+        ToggleBoundaries();
         StartCoroutine(TextFade(tutorialText, showDuration, textPauseDuration, true));
         yield return new WaitForSeconds(showDuration + textPauseDuration);
         StartCoroutine(TextFade(objectiveText, showDuration, textPauseDuration, true));
+        Invoke("ToggleBoundaries", showDuration + textPauseDuration);
+    }
+
+    private void ToggleBoundaries()
+    {
+        // Toggle boundaries
+        foreach (GameObject boundary in boundaries)
+        {
+            boundary.GetComponent<Boundary>().ToggleEnabled();
+        }
     }
 
     private IEnumerator TextFade(GameObject textObject, float totalDuration, float waitDuration, bool fadeOut)
