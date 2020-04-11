@@ -15,6 +15,9 @@ public class PlayerController : EntityController
     public int requiredTorches;
     public int torchesLit = 0;
 
+    // DEBUG God Mode
+    private bool godMode = false;
+
     // Outlets
     Rigidbody2D _rb;
     SpriteRenderer _sr;
@@ -140,6 +143,22 @@ public class PlayerController : EntityController
 
             PauseMenuController.instance.ToggleMenu(isPaused);
         }
+    }
+
+    public void ToggleGodMode()
+    {
+        instance.godMode = !instance.godMode;
+        if (instance.godMode)
+        {
+            instance.health = 1000;
+            instance.speed = 10;
+        }
+        else
+        {
+            instance.health = 3;
+            instance.speed = 3;
+        }
+        
     }
 
     private void LoadMainMenu()
