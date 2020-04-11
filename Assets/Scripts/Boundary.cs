@@ -32,19 +32,19 @@ public class Boundary : MonoBehaviour
             }
 
 
-            //else
-            //{
-            //    if (oldPosition.y > 0)
-            //    {
-            //        oldPosition.x -= 0.01f;
-            //    }
-            //    else
-            //    {
-            //        oldPosition.y += 0.01f;
-            //    }
+            else
+            {
+                if (oldY > 0)
+                {
+                    oldY -= 0.4f;
+                }
+                else
+                {
+                    oldY += 0.4f;
+                }
 
-            //    collision.gameObject.transform.position = new Vector3(oldPosition.x, -oldPosition.y);
-            //}
+                collision.gameObject.transform.position = new Vector3(oldX, -oldY);
+            }
         }
     }
 
