@@ -50,28 +50,31 @@ public class PlayerController : EntityController
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (health > 0)
         {
-            _rb.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _rb.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            _rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _rb.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
+            if (Input.GetKey(KeyCode.A))
+            {
+                _rb.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                _rb.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+            }
+            if (Input.GetKey(KeyCode.W))
+            {
+                _rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                _rb.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused)
+        if (!isPaused && health > 0)
         {
             // Aim reticle with mouse
             Vector3 mousePosition = Input.mousePosition;
@@ -139,6 +142,13 @@ public class PlayerController : EntityController
         }
     }
 
+    private void LoadMainMenu()
+    {
+        // Destroy HealthStatus and Player
+        Destroy(this.gameObject);
+        SceneManager.LoadScene("MainMenuScene");
+    }
+
     private void handleCollision(Collision2D collision)
     {
         if ((collision.gameObject.GetComponent<EnemyController>() || collision.gameObject.GetComponent<Projectile>()) && Time.time - timeOfCollision > damageRecoveryTime)
@@ -149,14 +159,14 @@ public class PlayerController : EntityController
                 health--;
                 DisplayDamage(damageRecoveryTime);
             }
-            else
+            else if (health <= 1)
             {
-                // Destroy HealthStatus and Player
+                health--;
                 Destroy(GameObject.Find("HealthStatus"));
-                Destroy(this.gameObject);
 
-                // Load the initial scene on death for now
-                SceneManager.LoadScene("MainMenuScene");
+                // Show death screen and then load main menu
+                PauseMenuController.instance.GameOver();
+                Invoke("LoadMainMenu", 4);
             }
         }
         else if (collision.gameObject.GetComponent<ItemController>())
@@ -186,25 +196,4 @@ public class PlayerController : EntityController
     {
         handleCollision(collision);
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.GetComponent<EnemyController>())
-    //    {
-    //        if (health > 1)
-    //        {
-    //            health--;
-    //            DisplayDamage(0.25f);
-    //        }
-    //        else
-    //        {
-    //            // Destroy HealthStatus and Player
-    //            Destroy(GameObject.Find("HealthStatus"));
-    //            Destroy(this.gameObject);
-
-    //            // Load the initial scene on death for now
-    //            SceneManager.LoadScene(0);
-    //        }
-    //    }
-    //}
 }

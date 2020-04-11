@@ -9,6 +9,9 @@ public class PauseMenuController : MonoBehaviour
     public GameObject canvasPrefab;
     public GameObject eventSystemPrefab;
 
+    private GameObject pausePanel;
+    private GameObject gameOverObject;
+
     private static GameObject canvasClone;
 
     private void Awake()
@@ -24,13 +27,20 @@ public class PauseMenuController : MonoBehaviour
         }
     }
 
-    public void ToggleMenu(bool isPaused)
+    private void InstantiateCanvas()
     {
         if (!canvasClone)
         {
             canvasClone = Instantiate(canvasPrefab);
+            pausePanel = canvasClone.transform.GetChild(0).gameObject;
+            gameOverObject = canvasClone.transform.GetChild(1).gameObject;
             Instantiate(eventSystemPrefab);
         }
+    }
+
+    public void ToggleMenu(bool isPaused)
+    {
+        InstantiateCanvas();
 
         if (isPaused)
         {
@@ -54,15 +64,11 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void GameOver()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        InstantiateCanvas();
+        canvasClone.SetActive(true);
+        pausePanel.SetActive(false);
+        gameOverObject.SetActive(true);
     }
 }
