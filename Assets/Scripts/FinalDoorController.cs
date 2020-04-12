@@ -95,11 +95,15 @@ public class FinalDoorController : MonoBehaviour
         StartCoroutine(TextFadeController.TextFade(finalText1, textShowDuration, textPauseDuration, true));
         yield return new WaitForSeconds(delayBetweenStarts);
         StartCoroutine(TextFadeController.TextFade(finalText2, textShowDuration, textPauseDuration, true));
-        Invoke("ToggleFinalBoundary", delayBetweenStarts + textShowDuration + textPauseDuration);
+        Invoke("ToggleFinalBoundary", textShowDuration + textPauseDuration);
     }
 
     private void ToggleFinalBoundary()
     {
-        Debug.Log("Final");
+        for (int i = 0; i < finalDoorObjects.Length; i++)
+        {
+            Destroy(finalDoorObjects[i].gameObject);
+        }
+        finalBoundary.GetComponent<Boundary>().ToggleEnabled();
     }
 }
