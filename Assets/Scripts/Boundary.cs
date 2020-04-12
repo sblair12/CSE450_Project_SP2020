@@ -7,10 +7,16 @@ public class Boundary : MonoBehaviour
 {
     public string sceneToSwitchTo;
     public bool horizontalSceneShift;
+    public bool isEnabled;
+
+    public void ToggleEnabled()
+    {
+        isEnabled = !isEnabled;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() && !string.IsNullOrEmpty(sceneToSwitchTo))
+        if (isEnabled && collision.gameObject.GetComponent<PlayerController>() && !string.IsNullOrEmpty(sceneToSwitchTo))
         {
             SceneManager.LoadScene(sceneToSwitchTo);
 
@@ -21,28 +27,35 @@ public class Boundary : MonoBehaviour
             {
                 if (oldX > 0)
                 {
-                    oldX -= 0.1f;
+                    oldX -= 0.2f;
                 }
                 else
                 {
-                    oldX += 0.1f;
+                    oldX += 0.2f;
                 }
 
                 collision.gameObject.transform.position = new Vector3(-oldX, oldY);
             }
-            //else
-            //{
-            //    if (oldPosition.y > 0)
-            //    {
-            //        oldPosition.x -= 0.01f;
-            //    }
-            //    else
-            //    {
-            //        oldPosition.y += 0.01f;
-            //    }
 
-            //    collision.gameObject.transform.position = new Vector3(oldPosition.x, -oldPosition.y);
-            //}
+
+            else
+            {
+                if (oldY > 0)
+                {
+                    oldY -= 0.4f;
+                }
+                else
+                {
+                    oldY += 0.4f;
+                }
+
+                collision.gameObject.transform.position = new Vector3(oldX, -oldY);
+            }
         }
+    }
+
+    private void AutoSave()
+    {
+
     }
 }

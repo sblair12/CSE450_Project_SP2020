@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     public float speed;
     public float rotationSpeed;
 
+    public bool isPlayerProjectile = false;
+
     // Start is called before the first frame update
     void Start()
     {

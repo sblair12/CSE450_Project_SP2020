@@ -18,8 +18,8 @@ TagManager:
   - Boundary
   - Enemy
   - EnemyProjectile
-  - 
-  - 
+  - Item
+  - PlayerOnlyBoundary
   - 
   - 
   - 

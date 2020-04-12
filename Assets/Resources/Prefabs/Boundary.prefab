@@ -92,3 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686ca059f14876940bdc2f93173e758d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToSwitchTo: 
+  horizontalSceneShift: 0
+  isEnabled: 1

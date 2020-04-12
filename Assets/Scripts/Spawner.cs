@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     public GameObject enemyPrefab;
     public float timeOffset;
     public float frequency;
+    public bool isEnabled;
 
     void Start()
     {
@@ -15,7 +16,10 @@ public class Spawner : MonoBehaviour
 
     void LaunchEnemy()
     {
-        enemyPrefab.transform.position = gameObject.transform.position;
-        Instantiate(enemyPrefab);
+        if (isEnabled)
+        {
+            enemyPrefab.transform.position = gameObject.transform.position;
+            Instantiate(enemyPrefab);
+        }
     }
 }
