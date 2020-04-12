@@ -77,71 +77,74 @@ public class PlayerController : EntityController
     // Update is called once per frame
     void Update()
     {
-        if (!isPaused && health > 0)
+        if (health > 0)
         {
-            // Aim reticle with mouse
-            Vector3 mousePosition = Input.mousePosition;
-            Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
-            Vector3 directionFromPlayerToMouse = mousePositionInWorld - transform.position;
-
-            float radiansToMouse = Mathf.Atan2(directionFromPlayerToMouse.y, directionFromPlayerToMouse.x);
-            float angleToMouse = radiansToMouse * 180f / Mathf.PI;
-
-            aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
-
-            // Orient character based on mouse angle
-            float absAngle = Mathf.Abs(angleToMouse);
-
-            // Horizontal aim
-            if (absAngle > 135 || absAngle < 35)
+            // Pause menu
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _sr.sprite = horizontalPerspective;
+                isPaused = !isPaused;
 
-                // Facing to the right
-                if (absAngle < 45)
+                PauseMenuController.instance.ToggleMenu(isPaused);
+            }
+
+            if (!isPaused)
+            {
+                // Aim reticle with mouse
+                Vector3 mousePosition = Input.mousePosition;
+                Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+                Vector3 directionFromPlayerToMouse = mousePositionInWorld - transform.position;
+
+                float radiansToMouse = Mathf.Atan2(directionFromPlayerToMouse.y, directionFromPlayerToMouse.x);
+                float angleToMouse = radiansToMouse * 180f / Mathf.PI;
+
+                aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
+
+                // Orient character based on mouse angle
+                float absAngle = Mathf.Abs(angleToMouse);
+
+                // Horizontal aim
+                if (absAngle > 135 || absAngle < 35)
+                {
+                    _sr.sprite = horizontalPerspective;
+
+                    // Facing to the right
+                    if (absAngle < 45)
+                    {
+                        _sr.flipX = false;
+                    }
+                    // Facing to the left
+                    else
+                    {
+                        _sr.flipX = true;
+                    }
+                }
+                // Vertical aim
+                else
                 {
                     _sr.flipX = false;
+                    // Facing up
+                    if (angleToMouse > 0)
+                    {
+                        _sr.sprite = upPerspective;
+                    }
+                    else
+                    {
+                        _sr.sprite = downPerspective;
+                    }
                 }
-                // Facing to the left
-                else
+
+                // Shoot with left mouse
+                Projectile[] playerProjectilesLoaded = GameObject.FindObjectsOfType<Projectile>();
+                playerProjectilesLoaded = Array.FindAll(playerProjectilesLoaded, p => p.isPlayerProjectile);
+                if (Input.GetMouseButtonDown(0) && playerProjectilesLoaded.Length < maxShots)
                 {
-                    _sr.flipX = true;
+                    GameObject newProjectile = Instantiate(projectilePrefab);
+                    newProjectile.layer = LayerMask.NameToLayer(PLAYER_PROJECTILE);
+                    newProjectile.GetComponent<Projectile>().isPlayerProjectile = true;
+                    newProjectile.transform.position = transform.position;
+                    newProjectile.transform.rotation = aimPivot.rotation;
                 }
             }
-            // Vertical aim
-            else
-            {
-                _sr.flipX = false;
-                // Facing up
-                if (angleToMouse > 0)
-                {
-                    _sr.sprite = upPerspective;
-                }
-                else
-                {
-                    _sr.sprite = downPerspective;
-                }
-            }
-
-            // Shoot with left mouse
-            Projectile[] playerProjectilesLoaded = GameObject.FindObjectsOfType<Projectile>();
-            playerProjectilesLoaded = Array.FindAll(playerProjectilesLoaded, p => p.isPlayerProjectile);
-            if (Input.GetMouseButtonDown(0) && playerProjectilesLoaded.Length < maxShots)
-            {
-                GameObject newProjectile = Instantiate(projectilePrefab);
-                newProjectile.layer = LayerMask.NameToLayer(PLAYER_PROJECTILE);
-                newProjectile.GetComponent<Projectile>().isPlayerProjectile = true;
-                newProjectile.transform.position = transform.position;
-                newProjectile.transform.rotation = aimPivot.rotation;
-            }
-        }
-
-        // Pause menu
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPaused = !isPaused;
-
-            PauseMenuController.instance.ToggleMenu(isPaused);
         }
     }
 

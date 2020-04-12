@@ -261,6 +261,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23e000a8e92a3d14bb5bc2dda7f5e5b5, type: 3}
+--- !u!1 &321790058 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7268006128262733939, guid: 23e000a8e92a3d14bb5bc2dda7f5e5b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 321790057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &458045179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2033,6 +2039,14 @@ MonoBehaviour:
   - {fileID: 1556984289}
   - {fileID: 872031522}
   - {fileID: 1640211637}
+  spawners:
+  - {fileID: 1682276260}
+  - {fileID: 2072304311}
+  - {fileID: 1877025043}
+  - {fileID: 169207831}
+  exitBoundary: {fileID: 321790058}
+  newEnemySpeed: 5
+  newEnemyHealth: 4
 --- !u!4 &1871749720
 Transform:
   m_ObjectHideFlags: 0

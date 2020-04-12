@@ -43,23 +43,19 @@ public class FinalDoorController : MonoBehaviour
                 List<float> randomOffsets = new List<float>();
                 for (int i = 0; i < spawners.Length; i++)
                 {
+                    // Randomize spawner frequencies and offsets so they are unique
                     Spawner spawner = spawners[i].GetComponent<Spawner>();
-                    if (spawner.frequency > 6 || randomFrequencies.Contains(spawner.frequency)) {
-                        while (randomFrequencies.Contains(spawner.frequency))
-                        {
-                            spawner.frequency = random.Next(0, 7);
-                        }
+                    while (spawner.frequency > 6 || randomFrequencies.Contains(spawner.frequency))
+                    {
+                        spawner.frequency = random.Next(0, 7);
                     }
                     randomFrequencies.Add(spawner.frequency);
 
-                    if (spawner.timeOffset > spawners.Length || randomOffsets.Contains(spawner.timeOffset))
+                    while (spawner.timeOffset > spawners.Length || randomOffsets.Contains(spawner.timeOffset))
                     {
-                        while (randomFrequencies.Contains(spawner.timeOffset))
-                        {
-                            spawner.timeOffset = random.Next(1, spawners.Length + 1);
-                        }
+                        spawner.timeOffset = random.Next(1, spawners.Length + 1);
                     }
-                    randomOffsets.Add(spawner.frequency);
+                    randomOffsets.Add(spawner.timeOffset);
 
                     // Make enemies harder
                     EnemyController enemy = spawner.enemyPrefab.GetComponent<EnemyController>();
