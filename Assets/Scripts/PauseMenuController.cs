@@ -21,15 +21,15 @@ public class PauseMenuController : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        // Keep the instantiated object for PauseMenu only
+
+        if (instance != null)
         {
-            DontDestroyOnLoad(this.gameObject);
-            instance = this;
+            Destroy(instance.gameObject);
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+  
+        instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void OnEnable()
@@ -112,5 +112,10 @@ public class PauseMenuController : MonoBehaviour
     private void ResetGame()
     {
         PlayerController.instance.LoadMainMenu();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
