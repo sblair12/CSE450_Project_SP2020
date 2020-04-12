@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class FinalDoorController : MonoBehaviour
 {
     public GameObject[] torches;
+    public GameObject[] spawners;
+    public GameObject exitBoundary;
+    public float newEnemySpeed;
+    public int newEnemyHealth;
 
     private void OnEnable()
     {
@@ -21,9 +25,47 @@ public class FinalDoorController : MonoBehaviour
     {
         if (PlayerController.instance != null)
         {
-            for (int i = 0; i < PlayerController.instance.torchesLit; i++)
+            int torchesLit = PlayerController.instance.torchesLit;
+
+            for (int i = 0; i < torchesLit; i++)
             {
                 torches[i].GetComponent<TorchController>().SetLit(true);
+            }
+
+            // Check if all torches are lit for endgame
+            if (torchesLit == 4)
+            {
+                // Close the exit and set spawners
+                exitBoundary.GetComponent<Boundary>().ToggleEnabled();
+
+                System.Random random = new System.Random();
+                List<float> randomFrequencies = new List<float>();
+                List<float> randomOffsets = new List<float>();
+                for (int i = 0; i < spawners.Length; i++)
+                {
+                    Spawner spawner = spawners[i].GetComponent<Spawner>();
+                    if (spawner.frequency > 6 || randomFrequencies.Contains(spawner.frequency)) {
+                        while (randomFrequencies.Contains(spawner.frequency))
+                        {
+                            spawner.frequency = random.Next(0, 7);
+                        }
+                    }
+                    randomFrequencies.Add(spawner.frequency);
+
+                    if (spawner.timeOffset > spawners.Length || randomOffsets.Contains(spawner.timeOffset))
+                    {
+                        while (randomFrequencies.Contains(spawner.timeOffset))
+                        {
+                            spawner.timeOffset = random.Next(1, spawners.Length + 1);
+                        }
+                    }
+                    randomOffsets.Add(spawner.frequency);
+
+                    // Make enemies harder
+                    EnemyController enemy = spawner.enemyPrefab.GetComponent<EnemyController>();
+                    enemy.speed = newEnemySpeed;
+                    enemy.health = newEnemyHealth;
+                }
             }
         }
     }
