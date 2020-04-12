@@ -113,4 +113,9 @@ public class PauseMenuController : MonoBehaviour
     {
         PlayerController.instance.LoadMainMenu();
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
