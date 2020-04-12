@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 514791624}
   - component: {fileID: 514791623}
   m_Layer: 0
-  m_Name: Spawner (NE) (1)
+  m_Name: Spawner (Entrance 2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,6 +326,7 @@ MonoBehaviour:
     type: 3}
   timeOffset: 3
   frequency: 3
+  isEnabled: 1
 --- !u!4 &514791624
 Transform:
   m_ObjectHideFlags: 0
@@ -596,6 +597,7 @@ MonoBehaviour:
     type: 3}
   timeOffset: 2
   frequency: 3
+  isEnabled: 1
 --- !u!4 &831783890
 Transform:
   m_ObjectHideFlags: 0

@@ -2,14 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FinalDoorController : MonoBehaviour
 {
     public GameObject[] torches;
     public GameObject[] spawners;
     public GameObject exitBoundary;
+    public GameObject finalBoundary;
+    public GameObject[] finalDoorObjects;
     public float newEnemySpeed;
     public int newEnemyHealth;
+    public float endBossDuration;
+
+    public GameObject finalText1;
+    public GameObject finalText2;
+    public float winDelay;
+    public float textShowDuration;
+    public float textPauseDuration;
+    public float delayBetweenStarts;
 
     private void OnEnable()
     {
@@ -62,7 +73,33 @@ public class FinalDoorController : MonoBehaviour
                     enemy.speed = newEnemySpeed;
                     enemy.health = newEnemyHealth;
                 }
+
+                Invoke("OpenFinalDoor", endBossDuration);
             }
         }
+    }
+
+    private void OpenFinalDoor()
+    {
+        for (int i = 0; i < spawners.Length; i++)
+        {
+            spawners[i].GetComponent<Spawner>().isEnabled = false;
+        }
+
+        StartCoroutine(StartTextCoroutines());
+    }
+
+    private IEnumerator StartTextCoroutines()
+    {
+        yield return new WaitForSeconds(winDelay);
+        StartCoroutine(TextFadeController.TextFade(finalText1, textShowDuration, textPauseDuration, true));
+        yield return new WaitForSeconds(delayBetweenStarts);
+        StartCoroutine(TextFadeController.TextFade(finalText2, textShowDuration, textPauseDuration, true));
+        Invoke("ToggleFinalBoundary", delayBetweenStarts + textShowDuration + textPauseDuration);
+    }
+
+    private void ToggleFinalBoundary()
+    {
+        Debug.Log("Final");
     }
 }
