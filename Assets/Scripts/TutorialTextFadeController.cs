@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TutorialTextFadeController : MonoBehaviour
 {
-    private static bool alreadyFaded = false;
+    public static bool alreadyFaded = false;
 
     public GameObject tutorialText;
     public GameObject objectiveText;

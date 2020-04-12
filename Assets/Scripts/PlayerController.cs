@@ -169,6 +169,7 @@ public class PlayerController : EntityController
         // Destroy HealthStatus and Player
         Destroy(this.gameObject);
         TorchController.ResetTorches();
+        TutorialTextFadeController.alreadyFaded = false;
         SceneManager.LoadScene("MainMenuScene");
     }
 
