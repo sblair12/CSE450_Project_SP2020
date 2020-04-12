@@ -9,12 +9,15 @@ public class EnemyController : EntityController
 
     protected Rigidbody2D _rb;
     protected Transform playerTransform;
+    public SpriteRenderer _esr;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.Find("Player").transform;
+        _esr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame

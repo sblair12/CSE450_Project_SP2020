@@ -10,10 +10,13 @@ public class ShooterController : EnemyController
     public int playerLayer;
     public int boundaryLayer;
     public float shootDelay;
+    public Sprite normal, aggressive;
+    SpriteRenderer _sr;
 
     float shootTime = 0;
 
     // Update is called once per frame
+    
     void Update()
     {
         if (playerTransform != null)
@@ -23,8 +26,11 @@ public class ShooterController : EnemyController
             // Combine Player and Boundary layer masks in order to determine when Player is in line of sight
             int combinedLayerMask = (1 << playerLayer) | (1 << boundaryLayer);
             RaycastHit2D lineOfSight = Physics2D.Raycast(transform.position, sight, sightDistance, combinedLayerMask);
+           
             if (lineOfSight.collider != null && lineOfSight.collider.gameObject.GetComponent<PlayerController>() && Time.time > shootTime)
             {
+
+               
                 float radiansToMouse = Mathf.Atan2(sight.y, sight.x);
                 float angleToMouse = radiansToMouse * 180f / Mathf.PI;
                 Quaternion rotation = Quaternion.Euler(0, 0, angleToMouse);
@@ -36,6 +42,11 @@ public class ShooterController : EnemyController
 
                 shootTime = Time.time + shootDelay;
             }
+            if (lineOfSight.collider != null && lineOfSight.collider.gameObject.GetComponent<PlayerController>())
+            {
+                _esr.sprite = aggressive;
+            }
+            else { _esr.sprite = normal; }
         }
     }
 }
