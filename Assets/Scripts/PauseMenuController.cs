@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -8,9 +10,12 @@ public class PauseMenuController : MonoBehaviour
 
     public GameObject canvasPrefab;
     public GameObject eventSystemPrefab;
+    public float winScreenDelay;
+    public float loseScreenDelay;
+    public string nameOfWinScene;
 
     private GameObject pausePanel;
-    private GameObject gameOverObject;
+    private GameObject endTextObject;
 
     private static GameObject canvasClone;
 
@@ -27,13 +32,23 @@ public class PauseMenuController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += CheckEndGame;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= CheckEndGame;
+    }
+
     private void InstantiateCanvas()
     {
         if (!canvasClone)
         {
             canvasClone = Instantiate(canvasPrefab);
             pausePanel = canvasClone.transform.GetChild(0).gameObject;
-            gameOverObject = canvasClone.transform.GetChild(1).gameObject;
+            endTextObject = canvasClone.transform.GetChild(1).gameObject;
             Instantiate(eventSystemPrefab);
         }
     }
@@ -64,11 +79,38 @@ public class PauseMenuController : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void GameOver()
+    private void CheckEndGame(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == nameOfWinScene)
+        {
+            EndGame(true);
+        }
+    }
+
+    public void EndGame(bool win)
     {
         InstantiateCanvas();
         canvasClone.SetActive(true);
         pausePanel.SetActive(false);
-        gameOverObject.SetActive(true);
+
+        Text text = endTextObject.GetComponent<Text>();
+        if (win)
+        {
+            text.text = "YOU WIN";
+            text.color = new Color(0, 0, 0.50f);
+            Invoke("ResetGame", winScreenDelay);
+        }
+        else
+        {
+            text.text = "GAME OVER";
+            text.color = new Color(0.70f, 0, 0);
+            Invoke("ResetGame", loseScreenDelay);
+        }
+        endTextObject.SetActive(true);
+    }
+
+    private void ResetGame()
+    {
+        PlayerController.instance.LoadMainMenu();
     }
 }

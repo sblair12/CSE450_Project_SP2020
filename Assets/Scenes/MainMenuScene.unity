@@ -664,6 +664,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 8465427715469148390, guid: 375b344b2749ab24baa55b29a069e07b,
+        type: 3}
+      propertyPath: nameOfWinScene
+      value: WinScene
+      objectReference: {fileID: 0}
     - target: {fileID: 8465427715469148391, guid: 375b344b2749ab24baa55b29a069e07b,
         type: 3}
       propertyPath: m_LocalPosition.x

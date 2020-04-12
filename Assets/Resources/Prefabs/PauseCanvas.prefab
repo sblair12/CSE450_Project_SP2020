@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 2888984098636937472}
   - component: {fileID: 2791584205368902291}
   m_Layer: 5
-  m_Name: Text - GameOver
+  m_Name: Text - End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7075472, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -436,7 +436,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: GAME OVER
+  m_Text: 
 --- !u!1 &3641999004756303833
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,3 +47,5 @@ MonoBehaviour:
     type: 3}
   eventSystemPrefab: {fileID: 7269323569495246649, guid: 5d847b9caab2ec341927e98155ffe215,
     type: 3}
+  winScreenDelay: 10
+  loseScreenDelay: 4

@@ -164,7 +164,7 @@ public class PlayerController : EntityController
         
     }
 
-    private void LoadMainMenu()
+    public void LoadMainMenu()
     {
         // Destroy HealthStatus and Player
         Destroy(this.gameObject);
@@ -182,14 +182,13 @@ public class PlayerController : EntityController
                 health--;
                 DisplayDamage(damageRecoveryTime);
             }
-            else if (health <= 1)
+            else if (health == 1)
             {
                 health--;
                 Destroy(GameObject.Find("HealthStatus"));
 
                 // Show death screen and then load main menu
-                PauseMenuController.instance.GameOver();
-                Invoke("LoadMainMenu", 4);
+                PauseMenuController.instance.EndGame(false);
             }
         }
         else if (collision.gameObject.GetComponent<ItemController>())
